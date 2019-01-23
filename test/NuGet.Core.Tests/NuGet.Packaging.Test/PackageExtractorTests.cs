@@ -3595,7 +3595,7 @@ namespace NuGet.Packaging.Test
             var exception = await Assert.ThrowsAsync<ArgumentNullException>(
                 () => PackageExtractor.CopySatelliteFilesAsync(
                     packageIdentity: null,
-                    packagePathResolver: new PackagePathResolver(rootDirectory: "a"),
+                    packagePathResolver: new PackagePathResolver(rootDirectory: Path.GetFullPath("a")),
                     packageSaveMode: PackageSaveMode.Defaultv3,
                     packageExtractionContext: new PackageExtractionContext(
                         PackageSaveMode.Defaultv2,
