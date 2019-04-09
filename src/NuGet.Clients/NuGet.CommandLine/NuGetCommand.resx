@@ -5526,4 +5526,13 @@ nuget-trusted-signers Remove -Name TrustedRepo</value>
   <data name="TrustedSignersCommandServiceIndexDescription" xml:space="preserve">
     <value>Service index for a repository to be trusted.</value>
   </data>
+  <data name="PushCommandContinueOnErrorDescription" xml:space="preserve">
+    <value>Specifies the Error Code(s) which will not halt the push.</value>
+  </data>
+  <data name="PushCommandSkipDuplicate" xml:space="preserve">
+    <value>Package already exists. Skipping push.</value>
+  </data>
+  <data name="PushCommandSkipInvalid" xml:space="preserve">
+    <value>Package is invalid. Skipping push.</value>
+  </data>
 </root>

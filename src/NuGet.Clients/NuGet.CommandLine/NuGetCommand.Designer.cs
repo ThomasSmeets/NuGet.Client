@@ -19,7 +19,7 @@ namespace NuGet.CommandLine {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class NuGetCommand {
@@ -8835,6 +8835,15 @@ namespace NuGet.CommandLine {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specifies the Error Code(s) which will not halt the push..
+        /// </summary>
+        internal static string PushCommandContinueOnErrorDescription {
+            get {
+                return ResourceManager.GetString("PushCommandContinueOnErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pushes a package to the server and publishes it..
         /// </summary>
         internal static string PushCommandDescription {
@@ -8975,6 +8984,24 @@ namespace NuGet.CommandLine {
         internal static string PushCommandNoSymbolsDescription {
             get {
                 return ResourceManager.GetString("PushCommandNoSymbolsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Package already exists. Skipping push..
+        /// </summary>
+        internal static string PushCommandSkipDuplicate {
+            get {
+                return ResourceManager.GetString("PushCommandSkipDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Package is invalid. Skipping push..
+        /// </summary>
+        internal static string PushCommandSkipInvalid {
+            get {
+                return ResourceManager.GetString("PushCommandSkipInvalid", resourceCulture);
             }
         }
         

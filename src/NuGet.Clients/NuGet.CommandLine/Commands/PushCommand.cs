@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -38,6 +39,10 @@ namespace NuGet.CommandLine
         [Option(typeof(NuGetCommand), "CommandNoServiceEndpointDescription")]
         public bool NoServiceEndpoint { get; set; }
 
+        [Option(typeof(NuGetCommand), "PushCommandContinueOnErrorDescription")]
+        public ICollection<string> ContinueOnError { get; } = new List<string>();
+        //= new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
         public override async Task ExecuteCommandAsync()
         {
             string packagePath = Arguments[0];
@@ -51,6 +56,9 @@ namespace NuGet.CommandLine
             {
                 apiKeyValue = Arguments[1];
             }
+
+            var continueOnDuplicate = ContinueOnError.Contains(CommandLineConstants.ContinueOnErrorOptions.duplicate.ToString());
+            var continueOnInvalid = ContinueOnError.Contains(CommandLineConstants.ContinueOnErrorOptions.invalid.ToString());
 
             try
             {
@@ -66,6 +74,8 @@ namespace NuGet.CommandLine
                     DisableBuffering,
                     NoSymbols,
                     NoServiceEndpoint,
+                    continueOnDuplicate,
+                    continueOnInvalid,
                     Console);
             }
             catch (TaskCanceledException ex)

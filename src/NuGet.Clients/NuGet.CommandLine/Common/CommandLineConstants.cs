@@ -1,4 +1,4 @@
-﻿namespace NuGet.CommandLine
+namespace NuGet.CommandLine
 {
     internal static class CommandLineConstants
     {
@@ -9,6 +9,7 @@
         internal static string NuGetDocsCommandLineReference = "http://docs.nuget.org/docs/reference/command-line-reference";
 
         internal static string PackagesDirectoryName = "packages";
-    
+
+        internal enum ContinueOnErrorOptions {duplicate, invalid };
     }
 }
