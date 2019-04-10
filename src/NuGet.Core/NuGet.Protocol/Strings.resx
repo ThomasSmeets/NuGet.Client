@@ -515,4 +515,10 @@ The "ms" should be localized to the abbreviation for milliseconds.</comment>
   <data name="Plugin_DownloadNotSupportedSinceUnsignedNotAllowed" xml:space="preserve">
     <value>Downloading a package from a plugin is not supported since unsigned packages are not allowed and package download plugins do not support signed package verification.</value>
   </data>
+  <data name="PushCommandSkipDuplicate" xml:space="preserve">
+    <value>Package already exists. Skipping push.</value>
+  </data>
+  <data name="PushCommandSkipInvalid" xml:space="preserve">
+    <value>Package is invalid. Skipping push.</value>
+  </data>
 </root>
