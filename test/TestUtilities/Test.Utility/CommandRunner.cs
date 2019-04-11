@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -65,7 +65,7 @@ namespace NuGet.Test.Utility
 
                 p.StartInfo = psi;
                 p.Start();
-
+               
                 var outputTask = ConsumeStreamReaderAsync(p.StandardOutput, output);
                 var errorTask = ConsumeStreamReaderAsync(p.StandardError, errors);
 

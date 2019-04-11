@@ -188,20 +188,20 @@ namespace NuGet.CommandLine.FuncTest.Commands
                     Assert.Contains("Your package was pushed.", result.Item2);
                     Assert.True(File.Exists(outputPath), "The package should have been pushed");
                     Assert.DoesNotContain("Response status code does not indicate success", result.AllOutput);
-                    Assert.DoesNotContain("Skipping existing package.", result.AllOutput);
+                    Assert.DoesNotContain("Package already exists. Skipping push.", result.AllOutput);
                     Assert.Equal(File.ReadAllBytes(sourcePath), File.ReadAllBytes(outputPath));
 
                     // Second run of command is the duplicate.
                     Assert.False(0 == result2.Item1, result2.AllOutput);
                     Assert.Contains("Response status code does not indicate success", result2.AllOutput);
-                    Assert.DoesNotContain("Skipping existing package.", result2.AllOutput);
+                    Assert.DoesNotContain("Package already exists. Skipping push.", result2.AllOutput);
                     Assert.Equal(File.ReadAllBytes(sourcePath), File.ReadAllBytes(outputPath));
 
                     //Apparently our CommandRunner does not handle batches so this doesn't work.
                     //// Third run after a duplicate should fail without the ContinueOnError flag.
                     //Assert.False(0 == result3.Item1, $"{result3.Item2} {result3.Item3}");
                     //Assert.DoesNotContain("Your package was pushed.", result3.Item2);
-                    //Assert.DoesNotContain("Skipping existing package.", result2.AllOutput);
+                    //Assert.DoesNotContain("Package already exists. Skipping push.", result2.AllOutput);
                     //Assert.Contains("Response status code does not indicate success", result.AllOutput);
                     //Assert.False(File.Exists(outputPath2), "The package should not have been pushed");
 
@@ -265,7 +265,7 @@ namespace NuGet.CommandLine.FuncTest.Commands
                     // Second run of command is the duplicate.
                     Assert.True(0 == result2.Item1, result2.AllOutput);
                     Assert.DoesNotContain("Your package was pushed.", result2.AllOutput);
-                    Assert.Contains("Skipping existing package.", result2.AllOutput);
+                    Assert.Contains("Package already exists. Skipping push.", result2.AllOutput);
                     Assert.DoesNotContain("Response status code does not indicate success", result2.AllOutput);
 
                     // Third run after a duplicate should be successful with the ContinueOnError flag.
@@ -282,7 +282,7 @@ namespace NuGet.CommandLine.FuncTest.Commands
         [Fact]
         public void PushCommand_ContinueOnErrorInvalid_InvalidProceedsPush()
         {
-            
+            //Package is invalid. Skipping push.
         }
 
 
