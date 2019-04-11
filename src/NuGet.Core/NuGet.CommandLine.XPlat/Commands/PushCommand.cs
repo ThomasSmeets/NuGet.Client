@@ -71,6 +71,12 @@ namespace NuGet.CommandLine.XPlat
                     Strings.NoServiceEndpoint_Description,
                     CommandOptionType.NoValue);
 
+                var continueOnError = push.Option(
+                    "-coe|--continue-on-error",
+                    Strings.NoServiceEndpoint_Description,
+                    CommandOptionType.NoValue);
+
+
                 var interactive = push.Option(
                     "--interactive",
                     Strings.NuGetXplatCommand_Interactive,

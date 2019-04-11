@@ -396,6 +396,8 @@ namespace NuGet.Protocol.Core.Types
         /// <returns>Indication of whether the log occurred.</returns>
         private static bool DetectAndLogContinueOnErrorOccurrence(HttpStatusCode? continuedErrorStatusCode, ILogger logger)
         {
+            bool continueOnErrorOccurred = false;
+
             if (continuedErrorStatusCode != null)
             {
                 string messageToLog = null;
@@ -403,20 +405,21 @@ namespace NuGet.Protocol.Core.Types
                 {
                     case HttpStatusCode.Conflict:
                         messageToLog = Strings.PushCommandSkipDuplicate;
+                        continueOnErrorOccurred = true;
                         break;
                     case HttpStatusCode.InternalServerError:
                         messageToLog = Strings.PushCommandSkipInvalid;
+                        continueOnErrorOccurred = true;
                         break;
                     default: break; //Not supported ContinueOnError code.
                 }
                 if (messageToLog != null)
                 {
                     logger?.LogInformation(messageToLog);
-                    return true;
                 }
             }
 
-            return false;
+            return continueOnErrorOccurred;
         }
 
         /// <summary>

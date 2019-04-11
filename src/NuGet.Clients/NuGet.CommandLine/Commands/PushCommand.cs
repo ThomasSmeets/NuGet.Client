@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -41,7 +42,6 @@ namespace NuGet.CommandLine
 
         [Option(typeof(NuGetCommand), "PushCommandContinueOnErrorDescription")]
         public ICollection<string> ContinueOnError { get; } = new List<string>();
-        //= new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         public override async Task ExecuteCommandAsync()
         {
@@ -57,9 +57,19 @@ namespace NuGet.CommandLine
                 apiKeyValue = Arguments[1];
             }
 
-            var continueOnDuplicate = ContinueOnError.Contains(CommandLineConstants.ContinueOnErrorOptions.duplicate.ToString());
-            var continueOnInvalid = ContinueOnError.Contains(CommandLineConstants.ContinueOnErrorOptions.invalid.ToString());
-
+            var continueOnDuplicate =  ContinueOnError.Contains(CommandLineConstants.ContinueOnErrorOptions.duplicate.ToString(), StringComparer.CurrentCultureIgnoreCase);
+            var continueOnInvalid = ContinueOnError.Contains(CommandLineConstants.ContinueOnErrorOptions.invalid.ToString(), StringComparer.CurrentCultureIgnoreCase);
+            //Check that the provided option(s) are one of the ContinueOnErrorOptions.
+            //Note: Removing "," is done because the Enum Parse by default will accept a comma-delimited list and say that it's valid.
+            //      Our delimiter is ";" (eg, "{validOption1};{validOption2}" should succeed)
+            //      but I want an error if a comma-delimited list of valid options is provided (eg, "{validOption1},{validOption2}" should error).
+            var continueOnErrorUnknown = ContinueOnError.FirstOrDefault(coe =>
+                                                        !Enum.TryParse<CommandLineConstants.ContinueOnErrorOptions>(coe.Replace(",",string.Empty).ToLower()
+                                                        ,out var result));
+            if (string.IsNullOrWhiteSpace(continueOnErrorUnknown) == false)
+            {
+                throw new ArgumentException($"Invalid option {continueOnErrorUnknown}", nameof(ContinueOnError));
+            }
             try
             {
                 await PushRunner.Run(
