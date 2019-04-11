@@ -407,7 +407,7 @@ namespace NuGet.Protocol.Core.Types
                         messageToLog = Strings.PushCommandSkipDuplicate;
                         continueOnErrorOccurred = true;
                         break;
-                    case HttpStatusCode.InternalServerError:
+                    case HttpStatusCode.BadRequest:
                         messageToLog = Strings.PushCommandSkipInvalid;
                         continueOnErrorOccurred = true;
                         break;
